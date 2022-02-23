@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+
+  web:
+    image: palaeontologyhelsinki/cradle_of_humankind_staging
+    restart: unless-stopped
+    ports:
+      - 8000:8000
+    command: sh -c ./scripts/entrypoint.prod.sh
+    volumes:
+      - static:/vol/web
+    env_file:
+      - ./.env
+
+  nginx:
+    build: ./nginx
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - static:/vol/web
+    environment:
+      - APP_DOMAIN=${APP_DOMAIN}
+      - PMA_DOMAIN=${PMA_DOMAIN}
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
+    depends_on:
+      - web
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8001:80
+    environment:
+      - PMA_HOST=${DB_HOST}
+      - UPLOAD_LIMIT=${PMA_UPLOAD_LIMIT}
+      - MEMORY_LIMIT=${PMA_MEMORY_LIMIT}
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
+
+  watchtower:
+    image: containrrr/watchtower
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 30
+
+volumes:
+  static: null
