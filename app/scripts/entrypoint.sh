@@ -15,4 +15,4 @@ python manage.py shell < ./scripts/initialize.py
 
 echo
 echo "STARTING DEVELOPMENT SERVER"
-python manage.py runserver
+python manage.py runserver 0.0.0.0:8000
