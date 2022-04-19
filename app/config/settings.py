@@ -41,7 +41,7 @@ def get_var(name, default_value=None):
 SECRET_KEY = get_var('SECRET_KEY', 'development_key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = get_var('DEBUG', 0)
+DEBUG = bool(int(get_var('DEBUG', 0)))
 
 ALLOWED_HOSTS = []
 ALLOWED_HOSTS_ENV = get_var('ALLOWED_HOSTS')
