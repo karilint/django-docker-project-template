@@ -15,7 +15,7 @@ RUN pip install --upgrade pip && \
 
 # ---------------------------------
 
-FROM python:3.9-slim AS build-image
+FROM python:3.10-slim AS build-image
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
