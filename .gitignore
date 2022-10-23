@@ -1,7 +1,7 @@
 .env*
-nginx/certs/cert.pem
-nginx/certs/key.pem
-nginx/certs/dhparam.pem
+nginx/certs/*
+nginx/certbot/*
+!nginx/certs/.keep
 
 .vscode/
 media/
