@@ -1,4 +1,4 @@
-FROM python:3.9-slim AS compile-image
+FROM python:3.10-slim AS compile-image
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
