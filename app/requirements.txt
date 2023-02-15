@@ -1,4 +1,4 @@
-Django==4.0.9
+Django==4.1.7
 asgiref==3.5.0
 sqlparse==0.4.2
 debugpy==1.5.1
